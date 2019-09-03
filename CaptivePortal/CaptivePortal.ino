@@ -7,14 +7,21 @@ DNSServer dnsServer;
 WiFiServer server(80);
 
 String responseHTML = ""
-  "<!DOCTYPE html><html><head><title>CaptivePortal</title></head><body>"
-  "<h1>Hello World!</h1><p>This is a captive portal example. All requests will "
-  "be redirected here.</p></body></html>";
+  "<!DOCTYPE html><html><head><title>Time Colony Wifi</title></head><body>"
+  "</br></br></br>"
+  "<div style=\"text-align: center;\">"
+  "┍━━━━━━*⑅*❀⑅*❀⑅*❀⑅*❀⑅*❀⑅*━━━━━━┑"
+  "<h1>Fuck your Instagram!</h1>"
+  "┕━━━━━━*⑅*❀⑅*❀⑅*❀⑅*❀⑅*❀⑅*━━━━━━┙"
+  "</br></br></br>"
+  "<h2>Sparkle Ponies Fooled: 11</h2>"
+  "</div>"
+  "</body></html>";
 
 void setup() {
   WiFi.mode(WIFI_AP);
   WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
-  WiFi.softAP("DNSServer CaptivePortal example");
+  WiFi.softAP("Time Colony ♥ Free Wifi ♥");
 
   // if DNSServer is started with "*" for domain name, it will reply with
   // provided IP to all DNS request
