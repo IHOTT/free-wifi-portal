@@ -5,6 +5,7 @@
 #define RESPONSE_DEBOUNCE_MILLIS 3000
 long lastIncrement = millis();
 Preferences preferences;
+bool newClient = true;
 
 const byte DNS_PORT = 53;
 IPAddress apIP(192, 168, 1, 1);
@@ -57,15 +58,17 @@ void loop() {
   WiFiClient client = server.available();   // listen for incoming clients
 
   if (client) {
-      // this example sketch serves this reponse multiple times, even if the client only requests it once.  try to prevent duplicate increments.
-      if (millis() - lastIncrement > RESPONSE_DEBOUNCE_MILLIS) {
-        updateCounter();
-        lastIncrement = millis();
-      }
-    
     String currentLine = "";
     while (client.connected()) {
       if (client.available()) {
+        if (newClient) newClient = false;
+        else{
+          // this example sketch serves this reponse multiple times, even if the client only requests it once.  try to prevent duplicate increments.
+          if (millis() - lastIncrement > RESPONSE_DEBOUNCE_MILLIS) {
+          updateCounter();
+          lastIncrement = millis();
+          }
+        }
         char c = client.read();
         if (c == '\n') {
           if (currentLine.length() == 0) {
@@ -81,6 +84,9 @@ void loop() {
         } else if (c != '\r') {
           currentLine += c;
         }
+      }
+      else{
+        newClient = true;
       }
     }
     client.stop();
