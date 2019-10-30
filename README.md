@@ -1,4 +1,5 @@
 Power usage (idle): 0.66W
+
 Power usage (active): 0.8W
 
 Libraries used:
